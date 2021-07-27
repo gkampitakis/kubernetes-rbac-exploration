@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-pod
+spec:
+  containers:
+    - name: kubectl
+      image: gkabitakis/kubernetes-rbac:latest
+      args: ['test']
+      imagePullPolicy: Always
+  restartPolicy: Never

@@ -22,4 +22,4 @@ FROM scratch
 COPY --from=builder ["/build/app", "/"]
 
 # Command to run when starting the container.
-CMD ["/app"]
+ENTRYPOINT [ "/app" ]
