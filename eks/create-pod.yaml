@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: create-pod
+spec:
+  serviceAccountName: admin
+  containers:
+    - name: kubectl
+      image: gkabitakis/kubernetes-rbac:latest
+      args: ['create']
+      imagePullPolicy: Always
+  restartPolicy: Never

@@ -15,7 +15,12 @@ COPY . .
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 RUN go build -ldflags="-s -w" -o app .
 
-FROM scratch
+FROM golang:1.16-alpine
+
+RUN apk --no-cache add curl && \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin
 
 # Copy binary and config files from /build 
 # to root folder of scratch container.
