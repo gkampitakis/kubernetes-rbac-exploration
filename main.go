@@ -15,6 +15,13 @@ import (
 func main() {
 	log.Println("Welcome to K8s Runner")
 
+	namespace := "default"
+	if os.Args[2] != "" {
+		namespace = os.Args[2]
+	}
+
+	log.Println(fmt.Sprintf("Selected namespace %s", namespace))
+
 	client, err := getK8sClient()
 	if err != nil {
 		panic(err.Error())
@@ -22,21 +29,22 @@ func main() {
 
 	switch os.Args[1] {
 	case "create":
-		cmd := exec.Command("kubectl", "run", "busybox", "--image=busybox", "--restart=Never")
+		cmd := exec.Command("kubectl", "run", "busybox", "--image=busybox", "--restart=Never", "-n", namespace)
 		cmd.Stderr = os.Stdout
 		err := cmd.Run()
 		if err != nil {
 			panic(err.Error())
 		}
 	case "delete":
-		cmd := exec.Command("kubectl", "delete", "--all", "pods")
+		cmd := exec.Command("kubectl", "delete", "--all", "pods", "-n", namespace)
 		cmd.Stderr = os.Stdout
 		err := cmd.Run()
 		if err != nil {
 			panic(err.Error())
 		}
 	case "list":
-		pods, err := client.CoreV1().Pods("default").List(context.TODO(), metav1.ListOptions{})
+
+		pods, err := client.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
 		if err != nil {
 			panic(err.Error())
 		}
