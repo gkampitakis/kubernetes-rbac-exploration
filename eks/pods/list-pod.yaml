@@ -3,11 +3,12 @@ kind: Pod
 metadata:
   name: list-pod
 spec:
-  serviceAccountName: admin
+  serviceAccountName: restricted-access
+  # serviceAccountName: admin
   # serviceAccountName: cluster-admin
   containers:
     - name: kubectl
       image: gkabitakis/kubernetes-rbac:latest
-      args: ['list', 'jobs']
+      args: ['list']
       imagePullPolicy: Always
   restartPolicy: Never

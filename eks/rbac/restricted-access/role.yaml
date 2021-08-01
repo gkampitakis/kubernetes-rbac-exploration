@@ -1,0 +1,11 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  # namespace: default
+  name: restricted-access
+rules:
+  - apiGroups: ['*']
+    resources: ['pods']
+    verbs: ['list']
+    # verbs: ['list','delete']
+    # verbs: ['list','delete','create']

@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: delete-pod
+  name: create-pod
 spec:
-  serviceAccountName: admin
+  serviceAccountName: restricted-access
+  # serviceAccountName: admin
   # serviceAccountName: cluster-admin
   containers:
     - name: kubectl
       image: gkabitakis/kubernetes-rbac:latest
-      args: ['delete']
+      args: ['create']
       imagePullPolicy: Always
   restartPolicy: Never
