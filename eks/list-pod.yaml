@@ -4,9 +4,10 @@ metadata:
   name: list-pod
 spec:
   serviceAccountName: admin
+  # serviceAccountName: cluster-admin
   containers:
     - name: kubectl
       image: gkabitakis/kubernetes-rbac:latest
-      args: ['list']
+      args: ['list', 'jobs']
       imagePullPolicy: Always
   restartPolicy: Never

@@ -4,6 +4,7 @@ metadata:
   name: create-pod
 spec:
   serviceAccountName: admin
+  # serviceAccountName: cluster-admin
   containers:
     - name: kubectl
       image: gkabitakis/kubernetes-rbac:latest
